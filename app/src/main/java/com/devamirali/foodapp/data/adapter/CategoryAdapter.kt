@@ -26,6 +26,7 @@ class CategoryAdapter(list : List<Category>) : RecyclerView.Adapter<CategoryAdap
 
     override fun onBindViewHolder(holder: CategoryVH, position: Int) {
         val category = categoryList[position]
+        binding.txtCategory.text = category.strCategory
         Glide.with(binding.categoryImg).load(category.strCategoryThumb).into(binding.categoryImg)
     }
 
