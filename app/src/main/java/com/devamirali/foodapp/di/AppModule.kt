@@ -1,6 +1,7 @@
 package com.devamirali.foodapp.di
 
 import android.app.Application
+import androidx.room.Room
 import com.devamirali.foodapp.data.api.MealApi
 import com.devamirali.foodapp.data.db.MealDataBase
 import dagger.Module
@@ -21,9 +22,8 @@ object AppModule {
         .addConverterFactory(GsonConverterFactory.create())
         .build().create(MealApi::class.java)
 
-//    @Provides
-//    @Singleton
-//    fun provideMealDataBase(app : Application) : MealDataBase{
-//
-//    }
+    @Provides
+    @Singleton
+    fun provideDataBase(app : Application) : MealDataBase =
+        Room.databaseBuilder(app,MealDataBase::class.java,"meal.db").build()
 }

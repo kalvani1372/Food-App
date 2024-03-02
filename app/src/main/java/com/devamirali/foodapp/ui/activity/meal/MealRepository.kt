@@ -2,12 +2,16 @@ package com.devamirali.foodapp.ui.activity.meal
 
 import android.util.Log
 import com.devamirali.foodapp.data.api.MealApi
+import com.devamirali.foodapp.data.db.MealDataBase
+import com.devamirali.foodapp.data.models.Meal
 import com.devamirali.foodapp.data.models.MealList
 import retrofit2.Response
 import javax.inject.Inject
 
-class MealRepository @Inject constructor(private val mealApi: MealApi) {
+class MealRepository @Inject constructor(private val mealApi: MealApi,private val db : MealDataBase) {
 
+    private val database = db.mealDao()
+    val getMealSave = database.getSaveMeal()
     suspend fun getMealInformation(mealId : String):Response<MealList>{
         val response = mealApi.getMealInformation(mealId)
 
@@ -19,5 +23,12 @@ class MealRepository @Inject constructor(private val mealApi: MealApi) {
             Log.d("testApp", "Failure to connected to getMealInformation")
         }
         return response
+    }
+
+    suspend fun upsertMeal(meal: Meal){
+        database.upsertMeal(meal)
+    }
+    suspend fun deleteMeal(meal: Meal){
+        database.deleteMeal(meal)
     }
 }

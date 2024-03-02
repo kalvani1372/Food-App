@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
+import com.devamirali.foodapp.data.models.Meal
 import com.devamirali.foodapp.databinding.ActivityMealBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +27,7 @@ class MealActivity : AppCompatActivity() {
     private lateinit var youtube : String
 
     private val mealMvvm : MealActivityViewModel by viewModels()
+    private lateinit var saveMeal : Meal
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealBinding.inflate(layoutInflater)
@@ -35,6 +37,13 @@ class MealActivity : AppCompatActivity() {
         mealMvvm.getMealInformation(idMeal)
         observeGetMealInformation()
 
+        binding.btnFav.setOnClickListener {
+            saveMeal.let {
+                if (it != null){
+                    mealMvvm.upsertMeal(it)
+                }
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -58,6 +67,7 @@ class MealActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun observeGetMealInformation(){
         mealMvvm.getMealInformationLiveData.observe(this,Observer{data ->
+            saveMeal = data
             binding.txtCategoryName.text = "Category : ${data.strCategory}"
             binding.txtArea.text = "Area : ${data.strArea}"
             binding.detailsInstructions.text = data.strInstructions

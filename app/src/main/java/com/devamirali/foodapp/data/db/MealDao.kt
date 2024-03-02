@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MealDao {
     @Insert
-    suspend fun insert(meal: Meal)
+    suspend fun upsertMeal(meal: Meal)
     @Delete
     suspend fun deleteMeal(meal: Meal)
     @Query("SELECT * FROM mealInformation")
-    suspend fun getMeal() : Flow<Meal>
+    fun getSaveMeal() : Flow<Meal>
 }

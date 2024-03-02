@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devamirali.foodapp.data.db.MealDataBase
 import com.devamirali.foodapp.data.models.Meal
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,4 +28,14 @@ class MealActivityViewModel
             }
         }
     }
+
+    fun upsertMeal(meal: Meal) = viewModelScope.launch {
+        mealRepository.upsertMeal(meal)
+    }
+
+    fun deleteMeal(meal: Meal) = viewModelScope.launch {
+        mealRepository.deleteMeal(meal)
+    }
+
+    fun getSaveMeals() = mealRepository.getMealSave
 }
