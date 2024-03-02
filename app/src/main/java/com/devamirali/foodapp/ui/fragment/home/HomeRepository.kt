@@ -1,4 +1,4 @@
-package com.devamirali.foodapp.data.api.repository
+package com.devamirali.foodapp.ui.fragment.home
 
 import android.util.Log
 import com.devamirali.foodapp.data.api.MealApi

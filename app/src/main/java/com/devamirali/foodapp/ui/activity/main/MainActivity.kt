@@ -1,4 +1,4 @@
-package com.devamirali.foodapp.ui.activity
+package com.devamirali.foodapp.ui.activity.main
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity

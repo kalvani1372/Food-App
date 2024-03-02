@@ -1,7 +1,12 @@
 package com.devamirali.foodapp.data.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "mealInformation")
 data class Meal(
     val dateModified: Any,
+    @PrimaryKey(autoGenerate = true)
     val idMeal: String,
     val strArea: String,
     val strCategory: String,

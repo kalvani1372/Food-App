@@ -1,6 +1,8 @@
 package com.devamirali.foodapp.di
 
+import android.app.Application
 import com.devamirali.foodapp.data.api.MealApi
+import com.devamirali.foodapp.data.db.MealDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,4 +20,10 @@ object AppModule {
         .baseUrl("https://www.themealdb.com/api/json/v1/1/")
         .addConverterFactory(GsonConverterFactory.create())
         .build().create(MealApi::class.java)
+
+//    @Provides
+//    @Singleton
+//    fun provideMealDataBase(app : Application) : MealDataBase{
+//
+//    }
 }

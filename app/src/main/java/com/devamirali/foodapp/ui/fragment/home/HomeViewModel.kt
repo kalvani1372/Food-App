@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.devamirali.foodapp.data.api.repository.HomeRepository
 import com.devamirali.foodapp.data.models.Category
 import com.devamirali.foodapp.data.models.Meal
 import com.devamirali.foodapp.data.models.Over
