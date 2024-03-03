@@ -8,11 +8,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.devamirali.foodapp.data.models.Meal
 import com.devamirali.foodapp.databinding.ActivityMealBinding
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MealActivity : AppCompatActivity() {
@@ -36,13 +36,20 @@ class MealActivity : AppCompatActivity() {
         getMealInformation()
         mealMvvm.getMealInformation(idMeal)
         observeGetMealInformation()
+        binding.btnFav.post {
 
         binding.btnFav.setOnClickListener {
-            saveMeal.let {
-                if (it != null){
-                    mealMvvm.upsertMeal(it)
-                }
+            saveMeal.let {meal ->
+                    mealMvvm.upsertMeal(meal)
             }
+        }
+
+//            lifecycleScope.launch {
+//                mealMvvm.getSaveMeals().collect {saveMeal ->
+//                    Log.d("testApp", saveMeal.toString())
+//
+//                }
+//            }
         }
     }
 
