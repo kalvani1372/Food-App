@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.devamirali.foodapp.data.db.MealDataBase
 import com.devamirali.foodapp.data.models.Meal
 import com.devamirali.foodapp.databinding.ActivityMealBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,15 +20,15 @@ class MealActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMealBinding
 
-    private lateinit var idMeal : String
-    private lateinit var strMeal : String
-    private lateinit var strMealThumb : String
-    private lateinit var strCategory : String
-    private lateinit var strArea : String
-    private lateinit var youtube : String
+    private lateinit var idMeal: String
+    private lateinit var strMeal: String
+    private lateinit var strMealThumb: String
+    private lateinit var strCategory: String
+    private lateinit var strArea: String
+    private lateinit var youtube: String
 
-    private val mealMvvm : MealActivityViewModel by viewModels()
-    private lateinit var saveMeal : Meal
+    private val mealMvvm: MealActivityViewModel by viewModels()
+    private lateinit var saveMeal: Meal
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMealBinding.inflate(layoutInflater)
@@ -38,23 +39,17 @@ class MealActivity : AppCompatActivity() {
         observeGetMealInformation()
         binding.btnFav.post {
 
-        binding.btnFav.setOnClickListener {
-            saveMeal.let {meal ->
+            binding.btnFav.setOnClickListener {
+                saveMeal.let { meal ->
                     mealMvvm.upsertMeal(meal)
+                }
             }
-        }
 
-//            lifecycleScope.launch {
-//                mealMvvm.getSaveMeals().collect {saveMeal ->
-//                    Log.d("testApp", saveMeal.toString())
-//
-//                }
-//            }
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun getMealInformation(){
+    private fun getMealInformation() {
         val intent = intent
         idMeal = intent.getStringExtra("idMeal").toString()
         strMeal = intent.getStringExtra("strMeal").toString()
@@ -66,14 +61,14 @@ class MealActivity : AppCompatActivity() {
 
         Glide.with(this).load(strMealThumb).into(binding.mealImage)
         binding.collapsing.title = strMeal
-//        binding.txtCategoryName.text = "Category : $strCategory"
-//        binding.txtArea.text = "Area : $strArea"
+        binding.txtCategoryName.text = "Category : $strCategory"
+        binding.txtArea.text = "Area : $strArea"
 
     }
 
     @SuppressLint("SetTextI18n")
-    private fun observeGetMealInformation(){
-        mealMvvm.getMealInformationLiveData.observe(this,Observer{data ->
+    private fun observeGetMealInformation() {
+        mealMvvm.getMealInformationLiveData.observe(this, Observer { data ->
             saveMeal = data
             binding.txtCategoryName.text = "Category : ${data.strCategory}"
             binding.txtArea.text = "Area : ${data.strArea}"

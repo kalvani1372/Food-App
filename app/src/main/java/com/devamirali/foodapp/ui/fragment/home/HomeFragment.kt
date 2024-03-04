@@ -40,6 +40,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.swipe.setOnRefreshListener {
+            getRandomMeal()
+            binding.swipe.isRefreshing = false
+        }
         getRandomMeal()
         getOverMeals()
         getCategoryMeals()
@@ -75,7 +79,7 @@ class HomeFragment : Fragment() {
 
         homeMvvm.getOverMeals()
         homeMvvm.getOverMealLiveData.observe(viewLifecycleOwner) { data ->
-            binding.overRec.adapter = OverAdapter(data)
+            binding.overRec.adapter = OverAdapter(requireContext(),data)
             binding.overRec.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
@@ -87,6 +91,10 @@ class HomeFragment : Fragment() {
             binding.categoriesRec.adapter = CategoryAdapter(it)
             binding.categoriesRec.layoutManager = GridLayoutManager(requireContext(),3)
         }
+    }
+
+    private fun onOverItemClick(){
+
     }
 
 }

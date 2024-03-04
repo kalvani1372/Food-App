@@ -42,9 +42,15 @@ class FavoriteFragment : Fragment() {
     private fun getSaveData(){
         lifecycleScope.launch {
             mealMvvm.getSaveMeals().collect{savedData ->
-                Log.d("testApp", savedData.toString())
-                binding.recFavorite.adapter = FavoriteAdapter(savedData)
-                binding.recFavorite.layoutManager = GridLayoutManager(requireContext(),2)
+                if (savedData.isEmpty()){
+                    binding.txtWarning.visibility = View.VISIBLE
+                    binding.layFavoriteFood.visibility = View.GONE
+                }else{
+                    Log.d("testApp", savedData.toString())
+                    binding.recFavorite.adapter = FavoriteAdapter(savedData)
+                    binding.recFavorite.layoutManager = GridLayoutManager(requireContext(),2)
+                }
+
             }
         }
     }

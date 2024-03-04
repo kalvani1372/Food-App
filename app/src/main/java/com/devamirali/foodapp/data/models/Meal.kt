@@ -5,9 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "mealInformation")
 data class Meal(
-    val dateModified: Any,
+
     @PrimaryKey
     val idMeal: String,
+    val dateModified: Any,
     val strArea: String,
     val strCategory: String,
     val strCreativeCommonsConfirmed: Any,
@@ -20,7 +21,7 @@ data class Meal(
     val strIngredient13: String,
     val strIngredient14: String,
     val strIngredient15: String,
-    val strIngredient16: String,
+    val strIngredient16: String?,
     val strIngredient17: String,
     val strIngredient18: String,
     val strIngredient19: String,
@@ -57,6 +58,6 @@ data class Meal(
     val strMeasure8: String,
     val strMeasure9: String,
     val strSource: String,
-    val strTags: String,
+    val strTags: String?,
     val strYoutube: String
 )

@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MealDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertMeal(meal: Meal)
+    suspend fun upsertMeal(meal: Meal) : Long
     @Delete
     suspend fun deleteMeal(meal: Meal)
     @Query("SELECT * FROM mealInformation")

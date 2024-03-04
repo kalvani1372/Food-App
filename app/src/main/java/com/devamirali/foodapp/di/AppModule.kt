@@ -25,5 +25,5 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDataBase(app : Application) : MealDataBase =
-        Room.databaseBuilder(app,MealDataBase::class.java,"meal.db").build()
+        Room.databaseBuilder(app,MealDataBase::class.java,"meal.db").fallbackToDestructiveMigration().build()
 }

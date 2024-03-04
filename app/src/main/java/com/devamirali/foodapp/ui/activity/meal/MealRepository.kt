@@ -5,10 +5,12 @@ import com.devamirali.foodapp.data.api.MealApi
 import com.devamirali.foodapp.data.db.MealDataBase
 import com.devamirali.foodapp.data.models.Meal
 import com.devamirali.foodapp.data.models.MealList
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
 
-class MealRepository @Inject constructor(private val mealApi: MealApi,private val db : MealDataBase) {
+class MealRepository @Inject constructor(private val mealApi: MealApi,db : MealDataBase) {
 
     private val database = db.mealDao()
     val getMealSave = database.getSaveMeal()
@@ -25,8 +27,10 @@ class MealRepository @Inject constructor(private val mealApi: MealApi,private va
         return response
     }
 
-    suspend fun upsertMeal(meal: Meal){
-        database.upsertMeal(meal)
+    fun upsertMeal(meal: Meal){
+        GlobalScope.launch {
+            database.upsertMeal(meal)
+        }
     }
     suspend fun deleteMeal(meal: Meal){
         database.deleteMeal(meal)

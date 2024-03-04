@@ -6,8 +6,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import androidx.room.RoomDatabase
 import com.devamirali.foodapp.R
 import com.devamirali.foodapp.data.adapter.PagerAdapter
+import com.devamirali.foodapp.data.db.MealDataBase
 import com.devamirali.foodapp.databinding.ActivityMainBinding
 import com.devamirali.foodapp.ui.fragment.categories.CategoriesFragment
 import com.devamirali.foodapp.ui.fragment.favorite.FavoriteFragment
@@ -16,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
 
     @SuppressLint("NewApi", "WrongConstant")

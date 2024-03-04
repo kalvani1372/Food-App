@@ -6,38 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.meal.MealActivity">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="@color/purple_200">
+
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@color/purple_200">
+            android:layout_height="match_parent"
+            app:collapsedTitleTextColor="@color/white"
+            app:contentScrim="@color/purple_200"
+            app:expandedTitleTextColor="@color/white"
+            app:layout_scrollFlags="snap|scroll|exitUntilCollapsed"
+            app:title="Meal name">
 
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/meal_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:collapsedTitleTextColor="@color/white"
-                app:contentScrim="@color/purple_200"
-                app:expandedTitleTextColor="@color/white"
-                app:layout_scrollFlags="snap|scroll|exitUntilCollapsed"
-                app:title="Meal name">
+                android:scaleType="centerCrop" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize" />
 
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/meal_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-                <androidx.appcompat.widget.Toolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize" />
-
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.core.widget.NestedScrollView
@@ -101,12 +101,13 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/details_instructions"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="instructions"
                 android:textSize="12sp"
                 android:textColor="@color/purple_200"
+                app:layout_constraintEnd_toEndOf="@id/rightGuideline"
                 app:layout_constraintTop_toBottomOf="@id/tv_instructions"
                 app:layout_constraintStart_toStartOf="@id/leftGuideline"/>
 
@@ -135,6 +136,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_favorite_24_white"
         android:tint="@color/white"
+        android:background="@drawable/baseline_favorite_24_white"
         app:elevation="0dp"
         app:layout_anchor="@id/appBar"
         app:layout_anchorGravity="bottom|end"
