@@ -2,7 +2,7 @@ package com.devamirali.foodapp.di
 
 import android.app.Application
 import androidx.room.Room
-import com.devamirali.foodapp.data.api.MealApi
+import com.devamirali.foodapp.data.network.MealApi
 import com.devamirali.foodapp.data.db.MealDataBase
 import dagger.Module
 import dagger.Provides

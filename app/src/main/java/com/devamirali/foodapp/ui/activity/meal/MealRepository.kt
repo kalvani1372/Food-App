@@ -1,7 +1,7 @@
 package com.devamirali.foodapp.ui.activity.meal
 
 import android.util.Log
-import com.devamirali.foodapp.data.api.MealApi
+import com.devamirali.foodapp.data.network.MealApi
 import com.devamirali.foodapp.data.db.MealDataBase
 import com.devamirali.foodapp.data.models.Meal
 import com.devamirali.foodapp.data.models.MealList

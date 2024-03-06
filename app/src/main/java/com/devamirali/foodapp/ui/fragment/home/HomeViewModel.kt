@@ -44,9 +44,9 @@ class HomeViewModel
     private val _getCategoryLiveData = MutableLiveData<List<Category>>()
     val getCategoryLiveData : LiveData<List<Category>> = _getCategoryLiveData
 
-    fun getCategoryMeal(){
+    fun getCategoryMealHomeFragment(){
         viewModelScope.launch {
-            val response = homeRepository.getCategory()
+            val response = homeRepository.getCategoryHomeFragment()
             response.body()!!.categories.let {
                 _getCategoryLiveData.postValue(it)
             }

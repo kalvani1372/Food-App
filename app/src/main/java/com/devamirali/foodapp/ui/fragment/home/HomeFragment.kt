@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
         }
         getRandomMeal()
         getOverMeals()
-        getCategoryMeals()
+        getCategoryMealsHomeFragment()
     }
 
     private fun getRandomMeal() {
@@ -85,10 +85,10 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getCategoryMeals() {
-        homeMvvm.getCategoryMeal()
+    private fun getCategoryMealsHomeFragment() {
+        homeMvvm.getCategoryMealHomeFragment()
         homeMvvm.getCategoryLiveData.observe(viewLifecycleOwner){
-            binding.categoriesRec.adapter = CategoryAdapter(it)
+            binding.categoriesRec.adapter = CategoryAdapter(requireActivity(),it)
             binding.categoriesRec.layoutManager = GridLayoutManager(requireContext(),3)
         }
     }

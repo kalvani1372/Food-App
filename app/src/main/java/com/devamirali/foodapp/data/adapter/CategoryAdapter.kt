@@ -1,16 +1,23 @@
 package com.devamirali.foodapp.data.adapter
 
+import android.app.Activity
+import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.devamirali.foodapp.R
 import com.devamirali.foodapp.data.models.Category
 import com.devamirali.foodapp.databinding.CategoryRowBinding
+import com.devamirali.foodapp.ui.fragment.category.CategoryFragment
 
-class CategoryAdapter(list : List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryVH>() {
+class CategoryAdapter(context: Activity,list : List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryVH>() {
 
     private lateinit var binding : CategoryRowBinding
+    private val iContext = context
     private val categoryList = list
 
     class CategoryVH(itemView: View) : RecyclerView.ViewHolder(itemView){}
@@ -27,8 +34,21 @@ class CategoryAdapter(list : List<Category>) : RecyclerView.Adapter<CategoryAdap
     override fun onBindViewHolder(holder: CategoryVH, position: Int) {
         val category = categoryList[position]
 
-        Glide.with(binding.categoryImg).load(category.strCategoryThumb).into(binding.categoryImg)
+        Glide.with(holder.itemView).load(category.strCategoryThumb).into(binding.categoryImg)
         binding.txtCategory.text = category.strCategory
+
+        binding.categoryImg.setOnClickListener {
+
+            val fragment = CategoryFragment()
+            val bundle = Bundle()
+            bundle.putString("idCategory",category.idCategory)
+            bundle.putString("strCategory",category.strCategory)
+            bundle.putString("strCategoryThumb",category.strCategoryThumb)
+            bundle.putString("strCategoryDescription",category.strCategoryDescription)
+            fragment.arguments = bundle
+
+            Navigation.findNavController(iContext, R.id.action_homeFragment_to_categoryFragment)
+        }
     }
 
 }

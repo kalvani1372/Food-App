@@ -1,7 +1,7 @@
 package com.devamirali.foodapp.ui.fragment.home
 
 import android.util.Log
-import com.devamirali.foodapp.data.api.MealApi
+import com.devamirali.foodapp.data.network.MealApi
 import com.devamirali.foodapp.data.models.CategoryList
 import com.devamirali.foodapp.data.models.MealList
 import com.devamirali.foodapp.data.models.OverList
@@ -38,8 +38,8 @@ class HomeRepository
         return responseOverMeal
     }
 
-    suspend fun getCategory() : Response<CategoryList>{
-        val responseCategory = mealApi.getCategory()
+    suspend fun getCategoryHomeFragment() : Response<CategoryList>{
+        val responseCategory = mealApi.getCategoryHomeFragment()
 
         if (responseCategory.isSuccessful){
             Log.d("testApp", responseCategory.code().toString())

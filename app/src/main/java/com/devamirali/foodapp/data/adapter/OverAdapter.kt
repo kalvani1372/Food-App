@@ -19,21 +19,6 @@ class OverAdapter(context: Context,list : List<Over>) : RecyclerView.Adapter<Ove
     private val iContext = context
     private val overList = list
     
-//    private val diffUtil = object  : DiffUtil.ItemCallback<Over>(){
-//        override fun areItemsTheSame(oldItem: Over, newItem: Over): Boolean {
-//            return oldItem.idMeal == newItem.idMeal
-//        }
-//
-//        override fun areContentsTheSame(oldItem: Over, newItem: Over): Boolean {
-//            return oldItem == newItem
-//        }
-//
-//    }
-//
-//    val differ = AsyncListDiffer(this,diffUtil)
-    
-    
-    
     class OverVH(itemView: View) : RecyclerView.ViewHolder(itemView){}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OverVH {
