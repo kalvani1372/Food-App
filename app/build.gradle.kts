@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.devamirali.foodapp"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -88,5 +88,4 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-
 }
