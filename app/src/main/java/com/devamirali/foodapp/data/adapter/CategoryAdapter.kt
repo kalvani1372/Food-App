@@ -1,11 +1,12 @@
 package com.devamirali.foodapp.data.adapter
 
 import android.app.Activity
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,7 +15,7 @@ import com.devamirali.foodapp.data.models.Category
 import com.devamirali.foodapp.databinding.CategoryRowBinding
 import com.devamirali.foodapp.ui.fragment.category.CategoryFragment
 
-class CategoryAdapter(context: Activity,list : List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryVH>() {
+class CategoryAdapter(context: Activity, list : List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryVH>() {
 
     private lateinit var binding : CategoryRowBinding
     private val iContext = context
@@ -37,7 +38,7 @@ class CategoryAdapter(context: Activity,list : List<Category>) : RecyclerView.Ad
         Glide.with(holder.itemView).load(category.strCategoryThumb).into(binding.categoryImg)
         binding.txtCategory.text = category.strCategory
 
-        binding.categoryImg.setOnClickListener {
+        binding.layHead.setOnClickListener {
 
             val fragment = CategoryFragment()
             val bundle = Bundle()
@@ -47,7 +48,13 @@ class CategoryAdapter(context: Activity,list : List<Category>) : RecyclerView.Ad
             bundle.putString("strCategoryDescription",category.strCategoryDescription)
             fragment.arguments = bundle
 
-            Navigation.findNavController(iContext, R.id.action_homeFragment_to_categoryFragment)
+           val intent = Intent(iContext,CategoryFragment::class.java)
+            intent.putExtra("idCategory",category.idCategory)
+            intent.putExtra("strCategory",category.strCategory)
+            intent.putExtra("strCategoryThumb",category.strCategoryThumb)
+            intent.putExtra("strCategoryDescription",category.strCategoryDescription)
+            iContext.startActivity(intent)
+
         }
     }
 

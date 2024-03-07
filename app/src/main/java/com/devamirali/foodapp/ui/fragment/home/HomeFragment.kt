@@ -10,12 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.devamirali.foodapp.R
 import com.devamirali.foodapp.data.adapter.CategoryAdapter
 import com.devamirali.foodapp.data.adapter.OverAdapter
+import com.devamirali.foodapp.data.models.Category
 import com.devamirali.foodapp.databinding.FragmentHomeBinding
 import com.devamirali.foodapp.ui.activity.meal.MealActivity
 import dagger.hilt.android.AndroidEntryPoint
