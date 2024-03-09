@@ -10,15 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.devamirali.foodapp.R
 import com.devamirali.foodapp.data.adapter.CategoryAdapter
 import com.devamirali.foodapp.data.adapter.OverAdapter
-import com.devamirali.foodapp.data.models.Category
 import com.devamirali.foodapp.databinding.FragmentHomeBinding
 import com.devamirali.foodapp.ui.activity.meal.MealActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +48,12 @@ class HomeFragment : Fragment() {
         }
         getRandomMeal()
         getOverMeals()
-        getCategoryMealsHomeFragment()
+        getCategoryMealsHomeFragment(binding.root)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
     }
 
     private fun getRandomMeal() {
@@ -88,16 +92,22 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getCategoryMealsHomeFragment() {
+    private fun getCategoryMealsHomeFragment(view: View) {
         homeMvvm.getCategoryMealHomeFragment()
         homeMvvm.getCategoryLiveData.observe(viewLifecycleOwner){
-            binding.categoriesRec.adapter = CategoryAdapter(requireActivity(),it)
+            binding.categoriesRec.adapter = CategoryAdapter(it) { category ->
+                val bundle = Bundle()
+                bundle.putString("idCategory", category.idCategory)
+                bundle.putString("strCategory", category.strCategory)
+                bundle.putString("strCategoryThumb", category.strCategoryThumb)
+                bundle.putString("strCategoryDescription", category.strCategoryDescription)
+
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_homeFragment_to_categoryFragment)
+
+            }
             binding.categoriesRec.layoutManager = GridLayoutManager(requireContext(),3)
         }
-    }
-
-    private fun onOverItemClick(){
-
     }
 
 }

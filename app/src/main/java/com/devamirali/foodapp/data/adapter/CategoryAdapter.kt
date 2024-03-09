@@ -1,26 +1,19 @@
 package com.devamirali.foodapp.data.adapter
 
 import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.devamirali.foodapp.R
 import com.devamirali.foodapp.data.models.Category
 import com.devamirali.foodapp.databinding.CategoryRowBinding
-import com.devamirali.foodapp.ui.fragment.category.CategoryFragment
 
-class CategoryAdapter(context: Activity, list : List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryVH>() {
+class CategoryAdapter(list : List<Category>, private var listiner: (Category) -> Unit)
+    : RecyclerView.Adapter<CategoryAdapter.CategoryVH>() {
 
     private lateinit var binding : CategoryRowBinding
-    private val iContext = context
     private val categoryList = list
-
     class CategoryVH(itemView: View) : RecyclerView.ViewHolder(itemView){}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryVH {
@@ -40,7 +33,9 @@ class CategoryAdapter(context: Activity, list : List<Category>) : RecyclerView.A
 
         binding.layHead.setOnClickListener {
 
-            val fragment = CategoryFragment()
+            listiner.invoke(category)
+
+         /*   val fragment = CategoryFragment()
             val bundle = Bundle()
             bundle.putString("idCategory",category.idCategory)
             bundle.putString("strCategory",category.strCategory)
@@ -53,7 +48,9 @@ class CategoryAdapter(context: Activity, list : List<Category>) : RecyclerView.A
             intent.putExtra("strCategory",category.strCategory)
             intent.putExtra("strCategoryThumb",category.strCategoryThumb)
             intent.putExtra("strCategoryDescription",category.strCategoryDescription)
-            iContext.startActivity(intent)
+            iContext.startActivity(intent)*/
+
+
 
         }
     }
