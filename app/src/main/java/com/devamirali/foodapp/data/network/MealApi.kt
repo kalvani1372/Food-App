@@ -23,4 +23,7 @@ interface MealApi {
 
     @GET("filter.php")
     suspend fun getCategory(@Query("c") categoryName : String) : Response<OverList>
+
+    @GET("categories.php")
+    suspend fun getCategories() : Response<CategoryList>
 }

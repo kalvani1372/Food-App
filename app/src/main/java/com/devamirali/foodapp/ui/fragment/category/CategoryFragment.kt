@@ -8,17 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.devamirali.foodapp.R
 import com.devamirali.foodapp.databinding.FragmentCategoriesBinding
+import com.devamirali.foodapp.databinding.FragmentCategoryBinding
 
 class CategoryFragment : Fragment() {
 
-    private lateinit var binding : FragmentCategoriesBinding
+    private lateinit var binding : FragmentCategoryBinding
     private lateinit var categoryName : String
     private lateinit var categoryId : String
     private lateinit var categoryNameThumb : String
     private lateinit var categoryNameDescription : String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentCategoriesBinding.inflate(layoutInflater)
+        binding = FragmentCategoryBinding.inflate(layoutInflater)
         return binding.root
     }
 

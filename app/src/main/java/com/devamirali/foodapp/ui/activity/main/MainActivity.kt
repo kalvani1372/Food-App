@@ -3,13 +3,10 @@ package com.devamirali.foodapp.ui.activity.main
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.devamirali.foodapp.R
-import com.devamirali.foodapp.data.adapter.PagerAdapter
 import com.devamirali.foodapp.databinding.ActivityMainBinding
-import com.devamirali.foodapp.ui.fragment.categories.CategoriesFragment
-import com.devamirali.foodapp.ui.fragment.favorite.FavoriteFragment
-import com.devamirali.foodapp.ui.fragment.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,33 +20,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val listFrag = mutableListOf<Fragment>()
-        listFrag.add(HomeFragment())
-        listFrag.add(FavoriteFragment())
-        listFrag.add(CategoriesFragment())
+        NavigationUI.setupWithNavController(binding.btmNavMenu,
+            Navigation.findNavController(this,R.id.hostFragment))
 
-        binding.pager.adapter = PagerAdapter(listFrag,this@MainActivity)
-        binding.pager.isUserInputEnabled = false
-
-        binding.btmNavMenu.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.item_home_frag -> {
-                    binding.pager.currentItem = 0
-                    true
-                }
-
-                R.id.item_favorite_frag -> {
-                    binding.pager.currentItem = 1
-                    true
-                }
-
-                R.id.item_categories_frag -> {
-                    binding.pager.currentItem = 2
-                    true
-                }
-
-                else -> false
-            }
-        }
     }
 }

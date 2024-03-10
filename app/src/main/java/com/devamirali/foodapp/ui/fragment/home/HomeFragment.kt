@@ -51,11 +51,6 @@ class HomeFragment : Fragment() {
         getCategoryMealsHomeFragment(binding.root)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     private fun getRandomMeal() {
         homeMvvm.getRandomMeal()
         homeMvvm.getRandomMealLiveData.observe(viewLifecycleOwner) { data ->
@@ -76,10 +71,7 @@ class HomeFragment : Fragment() {
             }catch (t:Throwable){
                 Log.d("TAG", "getRandomMeal: ${t.message.toString()}")
             }
-
         }
-
-
     }
 
     private fun getOverMeals() {
@@ -104,6 +96,7 @@ class HomeFragment : Fragment() {
 
                 Navigation.findNavController(view)
                     .navigate(R.id.action_homeFragment_to_categoryFragment)
+
 
             }
             binding.categoriesRec.layoutManager = GridLayoutManager(requireContext(),3)
