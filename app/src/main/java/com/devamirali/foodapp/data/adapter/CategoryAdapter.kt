@@ -35,23 +35,6 @@ class CategoryAdapter(list : List<Category>, private var listiner: (Category) ->
 
             listiner.invoke(category)
 
-         /*   val fragment = CategoryFragment()
-            val bundle = Bundle()
-            bundle.putString("idCategory",category.idCategory)
-            bundle.putString("strCategory",category.strCategory)
-            bundle.putString("strCategoryThumb",category.strCategoryThumb)
-            bundle.putString("strCategoryDescription",category.strCategoryDescription)
-            fragment.arguments = bundle
-
-           val intent = Intent(iContext,CategoryFragment::class.java)
-            intent.putExtra("idCategory",category.idCategory)
-            intent.putExtra("strCategory",category.strCategory)
-            intent.putExtra("strCategoryThumb",category.strCategoryThumb)
-            intent.putExtra("strCategoryDescription",category.strCategoryDescription)
-            iContext.startActivity(intent)*/
-
-
-
         }
     }
 

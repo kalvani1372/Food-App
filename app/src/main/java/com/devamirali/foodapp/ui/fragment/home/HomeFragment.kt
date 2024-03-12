@@ -20,6 +20,7 @@ import com.devamirali.foodapp.data.adapter.CategoryAdapter
 import com.devamirali.foodapp.data.adapter.OverAdapter
 import com.devamirali.foodapp.databinding.FragmentHomeBinding
 import com.devamirali.foodapp.ui.activity.meal.MealActivity
+import com.devamirali.foodapp.ui.fragment.category.CategoryFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -88,14 +89,17 @@ class HomeFragment : Fragment() {
         homeMvvm.getCategoryMealHomeFragment()
         homeMvvm.getCategoryLiveData.observe(viewLifecycleOwner){
             binding.categoriesRec.adapter = CategoryAdapter(it) { category ->
+
+                val fragment = CategoryFragment()
                 val bundle = Bundle()
                 bundle.putString("idCategory", category.idCategory)
                 bundle.putString("strCategory", category.strCategory)
                 bundle.putString("strCategoryThumb", category.strCategoryThumb)
                 bundle.putString("strCategoryDescription", category.strCategoryDescription)
+                fragment.arguments = bundle
 
                 Navigation.findNavController(view)
-                    .navigate(R.id.action_homeFragment_to_categoryFragment)
+                    .navigate(R.id.action_homeFragment_to_categoryFragment,fragment.arguments)
 
 
             }

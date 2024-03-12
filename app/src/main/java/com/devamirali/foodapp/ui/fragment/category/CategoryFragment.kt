@@ -6,8 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.devamirali.foodapp.R
-import com.devamirali.foodapp.databinding.FragmentCategoriesBinding
+import com.bumptech.glide.Glide
+import com.devamirali.foodapp.data.adapter.HomeCategoryAdapter
+import com.devamirali.foodapp.data.models.Over
 import com.devamirali.foodapp.databinding.FragmentCategoryBinding
 
 class CategoryFragment : Fragment() {
@@ -33,7 +34,16 @@ class CategoryFragment : Fragment() {
             categoryName = data.getString("strCategory").toString()
             categoryNameThumb = data.getString("strCategoryThumb").toString()
             categoryNameDescription = data.getString("strCategoryDescription").toString()
-            Log.d("testApp", categoryName)
+
+            val list = mutableListOf<String>()
+            list.add(categoryName)
+            list.add(categoryNameThumb)
+
+            binding.recHomeCategory.adapter = HomeCategoryAdapter(list)
         }
+
+
+
+        Log.d("testApp", categoryName)
     }
 }
