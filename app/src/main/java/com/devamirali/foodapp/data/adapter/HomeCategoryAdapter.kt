@@ -8,10 +8,10 @@ import com.bumptech.glide.Glide
 import com.devamirali.foodapp.data.models.Over
 import com.devamirali.foodapp.databinding.HomeCategoryRowBinding
 
-class HomeCategoryAdapter(list : List<String>) :
+class HomeCategoryAdapter(list : List<Over>) :
     RecyclerView.Adapter<HomeCategoryAdapter.HomeCategoryVH>() {
 
-    private val list = list
+    private val homeCategoryList = list
     private lateinit var binding: HomeCategoryRowBinding
 
     class HomeCategoryVH(itemView: View) : RecyclerView.ViewHolder(itemView) {}
@@ -22,14 +22,14 @@ class HomeCategoryAdapter(list : List<String>) :
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return homeCategoryList.size
     }
 
     override fun onBindViewHolder(holder: HomeCategoryVH, position: Int) {
 
-        val homeCategory = list[position]
+        val homeCategory = homeCategoryList[position]
 
-        Glide.with(holder.itemView).load(homeCategory[0]).into(binding.homeCategoryImg)
-        binding.txtHomeCategoryName.text = homeCategory[1].toString()
+        Glide.with(holder.itemView).load(homeCategory.strMealThumb).into(binding.homeCategoryImg)
+        binding.txtHomeCategoryName.text = homeCategory.strMeal
     }
 }

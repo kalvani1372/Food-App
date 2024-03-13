@@ -92,10 +92,11 @@ class HomeFragment : Fragment() {
 
                 val fragment = CategoryFragment()
                 val bundle = Bundle()
-                bundle.putString("idCategory", category.idCategory)
+                val pageName = "Go back to the home page"
+                val countPage = "1"
                 bundle.putString("strCategory", category.strCategory)
-                bundle.putString("strCategoryThumb", category.strCategoryThumb)
-                bundle.putString("strCategoryDescription", category.strCategoryDescription)
+                bundle.putString("pageName",pageName)
+                bundle.putString("countPage",countPage)
                 fragment.arguments = bundle
 
                 Navigation.findNavController(view)

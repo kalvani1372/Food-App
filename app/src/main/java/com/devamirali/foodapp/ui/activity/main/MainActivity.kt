@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btmNavMenu
+
         NavigationUI.setupWithNavController(binding.btmNavMenu,
             Navigation.findNavController(this,R.id.hostFragment))
 

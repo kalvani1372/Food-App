@@ -23,7 +23,11 @@
         android:id="@+id/categoriesFragment"
         android:name="com.devamirali.foodapp.ui.fragment.categories.CategoriesFragment"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.devamirali.foodapp.ui.fragment.category.CategoryFragment"
@@ -32,5 +36,8 @@
         <action
             android:id="@+id/action_categoryFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
     </fragment>
 </navigation>

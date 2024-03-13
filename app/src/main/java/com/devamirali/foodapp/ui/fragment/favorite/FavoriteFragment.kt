@@ -44,7 +44,8 @@ class FavoriteFragment : Fragment() {
             mealMvvm.getSaveMeals().collect{savedData ->
                 if (savedData.isEmpty()){
                     binding.txtWarning.visibility = View.VISIBLE
-                    binding.layFavoriteFood.visibility = View.GONE
+                    binding.txtTitle.visibility = View.GONE
+                    binding.recFavorite.visibility = View.GONE
                 }else{
                     Log.d("testApp", savedData.toString())
                     binding.recFavorite.adapter = FavoriteAdapter(savedData)
