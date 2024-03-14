@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.ProfileFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lay_edit"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_btn_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Edit"
+            android:textColor="@color/purple_200"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_btn_Done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Done"
+            android:textColor="@color/purple_200"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_btn_Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Cancel"
+            android:textColor="@color/purple_200"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lay_edit_profile"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/lay_edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_txt_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:hint="Name"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/purple_200"
+            app:boxStrokeWidth="1dp"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/purple_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/input_txt_family"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:enabled="true"
+                android:hint="Please Enter Your Name"
+                android:inputType="text"
+                android:minHeight="36dp"
+                android:padding="10dp"
+                android:textColor="@color/purple_200"
+                android:textColorHint="@color/md_grey_500"
+                android:textStyle="italic"
+                app:mode="PERSIAN_TEXT_NORMAL16"
+                tools:ignore="MissingPrefix" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_txt_family"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:hint="Family"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/purple_200"
+            app:boxStrokeWidth="1dp"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/purple_200"
+            app:layout_constraintTop_toBottomOf="@id/input_txt_name"
+            app:layout_constraintBottom_toTopOf="@id/input_txt_job"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_family"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:enabled="true"
+                android:hint="Please Enter Your Family"
+                android:inputType="text"
+                android:minHeight="36dp"
+                android:padding="10dp"
+                android:textColor="@color/purple_200"
+                android:textColorHint="@color/md_grey_500"
+                android:textStyle="italic"
+                app:mode="PERSIAN_TEXT_NORMAL16"
+                tools:ignore="MissingPrefix" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_txt_job"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:hint="Job"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/purple_200"
+            app:boxStrokeWidth="1dp"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/purple_200"
+            app:layout_constraintTop_toBottomOf="@id/input_txt_family"
+            app:layout_constraintBottom_toTopOf="@id/input_txt_username"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_job"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:enabled="true"
+                android:hint="Please Enter Your Occupation"
+                android:inputType="text"
+                android:minHeight="36dp"
+                android:padding="10dp"
+                android:textColor="@color/purple_200"
+                android:textColorHint="@color/md_grey_500"
+                android:textStyle="italic"
+                app:mode="PERSIAN_TEXT_NORMAL16"
+                tools:ignore="MissingPrefix" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_txt_username"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:hint="Username"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/purple_200"
+            app:boxStrokeWidth="1dp"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/purple_200"
+            app:layout_constraintTop_toBottomOf="@id/input_txt_job"
+            app:layout_constraintBottom_toTopOf="@id/input_txt_from"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_username"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:enabled="true"
+                android:hint="Please Enter Your Username"
+                android:inputType="text"
+                android:minHeight="36dp"
+                android:padding="10dp"
+                android:textColor="@color/purple_200"
+                android:textColorHint="@color/md_grey_500"
+                android:textStyle="italic"
+                app:mode="PERSIAN_TEXT_NORMAL16"
+                tools:ignore="MissingPrefix" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_txt_from"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:hint="From The Country"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/purple_200"
+            app:boxStrokeWidth="1dp"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="true"
+            app:hintTextColor="@color/purple_200"
+            app:layout_constraintTop_toBottomOf="@id/input_txt_username"
+            app:layout_constraintBottom_toTopOf="@id/animation_view_edit_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_from"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:enabled="true"
+                android:hint="Please Enter Where You Are From"
+                android:inputType="text"
+                android:minHeight="36dp"
+                android:padding="10dp"
+                android:textColor="@color/purple_200"
+                android:textColorHint="@color/md_grey_500"
+                android:textStyle="italic"
+                app:mode="PERSIAN_TEXT_NORMAL16"
+                tools:ignore="MissingPrefix" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view_edit_profile"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_txt_from"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/anim1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lay_profile"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/lay_edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="10dp"
+            app:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/food_logo"
+                app:civ_border_color="@color/md_green_400"
+                app:civ_border_width="2dp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Username"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="@id/card_view_profile"
+            app:layout_constraintStart_toStartOf="@id/card_view_profile"
+            app:layout_constraintTop_toBottomOf="@id/card_view_profile" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp"
+            android:hint="From"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="@id/txt_username"
+            app:layout_constraintStart_toStartOf="@id/txt_username"
+            app:layout_constraintTop_toBottomOf="@id/txt_username" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_change_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/card_view_apis_list_website"
+            app:layout_constraintTop_toBottomOf="@id/txt_from">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_img_camera"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/add_camera_icon"
+                    android:backgroundTint="@color/purple_200"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/txt_change_photo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_change_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Change Profile Photo"
+                    android:textColor="@color/purple_200"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="@id/view_img_camera"
+                    app:layout_constraintStart_toEndOf="@id/view_img_camera"
+                    app:layout_constraintTop_toTopOf="@id/view_img_camera" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_apis_list_website"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            app:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_view_change_photo">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_apis_list_website"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:letterSpacing="0.2"
+                    android:text="Food Apis List Website"
+                    android:textColor="@color/purple_200"
+                    android:textStyle="italic|bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_view"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/txt_apis_list_website"
+                    app:layout_constraintStart_toStartOf="@+id/txt_apis_list_website"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_apis_list_website"
+                    app:lottie_autoPlay="true"
+                    app:lottie_rawRes="@raw/anim1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="italic"
+        android:textColor="@color/purple_200"
+        android:text="Test Application Creation Date\n2024 / 03 / 14"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.5"
+        android:layout_marginBottom="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,4 +40,9 @@
             android:id="@+id/action_categoryFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.devamirali.foodapp.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

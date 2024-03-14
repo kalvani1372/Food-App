@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomTextView">
+        <attr name="mode" format="integer">
+            <enum name="PERSIAN_TEXT_LIGHT" value="0"/>
+            <enum name="PERSIAN_TEXT_NORMAL16" value="1"/>
+            <enum name="PERSIAN_TEXT_NORMAL14" value="2"/>
+            <enum name="PERSIAN_TEXT_BOLD" value="3"/>
+            <enum name="PERSIAN_TEXT_NORMAL12" value="4"/>
+            <enum name="text_number" value="0"/>
+            <enum name="text_title" value="1"/>
+            <enum name="text_title_sub" value="2"/>
+            <enum name="text_heading" value="3"/>
+            <enum name="icon" value="4"/>
+            <enum name="text_number_title" value="5"/>
+            <enum name="text_title_2" value="6"/>
+        </attr>
+    </declare-styleable>
+</resources>

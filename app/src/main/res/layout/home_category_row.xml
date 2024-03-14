@@ -21,7 +21,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/home_category_img"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="190dp"
                 android:background="@drawable/food_logo"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
