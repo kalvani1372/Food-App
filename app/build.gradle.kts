@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+//    kotlin("kotlin-android-extensions")
 }
 
 android {
@@ -92,4 +93,5 @@ dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     implementation ("com.airbnb.android:lottie:6.4.0")
+
 }
