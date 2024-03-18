@@ -47,32 +47,39 @@ class HomeFragment : Fragment() {
             getRandomMeal()
             binding.swipe.isRefreshing = false
         }
-        getRandomMeal()
-        getOverMeals()
-        getCategoryMealsHomeFragment(binding.root)
+
+        try {
+            getRandomMeal()
+            getOverMeals()
+            getCategoryMealsHomeFragment(binding.root)
+        }catch (t : Throwable){
+            Log.d("testApp", "onViewCreated: ${t.message.toString()}")
+        }
+
     }
 
     private fun getRandomMeal() {
-        homeMvvm.getRandomMeal()
-        homeMvvm.getRandomMealLiveData.observe(viewLifecycleOwner) { data ->
-            Glide.with(this).load(data.strMealThumb)
-                .placeholder(R.drawable.food_logo).into(binding.randomImage)
-            data.strCategory
+            homeMvvm.getRandomMeal()
+            homeMvvm.getRandomMealLiveData.observe(viewLifecycleOwner) { data ->
+                Glide.with(this).load(data.strMealThumb)
+                    .placeholder(R.drawable.food_logo).into(binding.randomImage)
+                data.strCategory
 
-            try {
-                binding.randomImage.setOnClickListener{
-                    val intent = Intent(requireContext(), MealActivity::class.java)
-                    intent.putExtra("idMeal",data.idMeal)
-                    intent.putExtra("strMeal",data.strMeal)
-                    intent.putExtra("strMealThumb",data.strMealThumb)
-                    intent.putExtra("strCategory",data.strCategory)
-                    intent.putExtra("strArea",data.strArea)
-                    startActivity(intent)
+                try {
+                    binding.randomImage.setOnClickListener{
+                        val intent = Intent(requireContext(), MealActivity::class.java)
+                        intent.putExtra("idMeal",data.idMeal)
+                        intent.putExtra("strMeal",data.strMeal)
+                        intent.putExtra("strMealThumb",data.strMealThumb)
+                        intent.putExtra("strCategory",data.strCategory)
+                        intent.putExtra("strArea",data.strArea)
+                        startActivity(intent)
+                    }
+                }catch (t:Throwable){
+                    Log.d("TAG", "getRandomMeal: ${t.message.toString()}")
                 }
-            }catch (t:Throwable){
-                Log.d("TAG", "getRandomMeal: ${t.message.toString()}")
             }
-        }
+
     }
 
     private fun getOverMeals() {

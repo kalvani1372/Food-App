@@ -12,7 +12,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -24,6 +26,7 @@ import com.devamirali.foodapp.databinding.FragmentProfileBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
+import org.json.JSONArray
 import java.io.IOException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
@@ -64,22 +67,59 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             val fileName = "countries.json"
             @SuppressLint("NewApi", "LocalSuppress") val reader = JsonReader(
                 InputStreamReader(
-                    requireActivity().assets.open(fileName), StandardCharsets.UTF_8))
+                    requireActivity().assets.open(fileName), StandardCharsets.UTF_8
+                )
+            )
 
             models = gson.fromJson<List<CountryModel>>(
-                reader, object : TypeToken<List<CountryModel?>?>() {}.type)
+                reader, object : TypeToken<List<CountryModel?>?>() {}.type
+            )
 
-            val s : String = models[0].countryName
+            val s: String = models[0].countryName
 
-            binding.edtFrom.adapter = CountryAdapter(models)
-//            binding.edtFrom.layoutManager = LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false)
 
-            Log.d("testApp", "onViewCreated: $s")
+            val jsonString = models
 
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+            // Parse JSON data
+            val jsonArray = JSONArray(jsonString)
+            val items = mutableListOf<String>()
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                items.add(jsonObject.getString("name"))
+            }
 
+            // Populate the spinner
+            val adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, items)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.edtFrom.adapter = adapter
+
+            // Handle spinner item selection
+            binding.edtFrom.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    Toast.makeText(
+                        requireActivity(),
+                        "Selected: ${items[position]}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // Do nothing
+                }
+
+
+            }
+
+                Log.d("testApp", "onViewCreated: $s")
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
 
     }
 
