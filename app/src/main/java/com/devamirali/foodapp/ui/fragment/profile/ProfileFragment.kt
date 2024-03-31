@@ -1,4 +1,4 @@
-package com.devamirali.foodapp.ui.fragment
+package com.devamirali.foodapp.ui.fragment.profile
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -8,19 +8,14 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.devamirali.foodapp.R
-import com.devamirali.foodapp.data.adapter.CountryAdapter
 import com.devamirali.foodapp.data.models.CountryModel
 import com.devamirali.foodapp.databinding.FragmentProfileBinding
 import com.google.gson.Gson
@@ -65,7 +60,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         val models: List<CountryModel>
         try {
             val fileName = "countries.json"
-            @SuppressLint("NewApi", "LocalSuppress") val reader = JsonReader(
+            @SuppressLint("NewApi", "LocalSuppress")
+            val reader = JsonReader(
                 InputStreamReader(
                     requireActivity().assets.open(fileName), StandardCharsets.UTF_8
                 )
@@ -75,52 +71,33 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 reader, object : TypeToken<List<CountryModel?>?>() {}.type
             )
 
-            val s: String = models[0].countryName
-
-
-            val jsonString = models
-
             // Parse JSON data
-            val jsonArray = JSONArray(jsonString)
-            val items = mutableListOf<String>()
-            for (i in 0 until jsonArray.length()) {
-                val jsonObject = jsonArray.getJSONObject(i)
-                items.add(jsonObject.getString("name"))
-            }
+            val itemList = parseJsonToList(models.toString())
 
-            // Populate the spinner
-            val adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, items)
+            val adapter = ArrayAdapter(requireActivity(),android.R.layout.simple_spinner_item, itemList)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.edtFrom.adapter = adapter
 
-            // Handle spinner item selection
-            binding.edtFrom.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    Toast.makeText(
-                        requireActivity(),
-                        "Selected: ${items[position]}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    // Do nothing
-                }
-
-
-            }
-
-                Log.d("testApp", "onViewCreated: $s")
 
             } catch (e: IOException) {
                 e.printStackTrace()
             }
 
+    }
+
+    private fun parseJsonToList(jsonData: String): List<CountryModel> {
+        val itemList = mutableListOf<CountryModel>()
+        try {
+            val jsonArray = JSONArray(jsonData)
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                val name = jsonObject.getString("name")
+                itemList.add(CountryModel(name))
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return itemList
     }
 
     override fun onClick(v: View?) {

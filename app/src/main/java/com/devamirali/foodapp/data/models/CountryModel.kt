@@ -2,10 +2,7 @@ package com.devamirali.foodapp.data.models
 
 import com.google.gson.annotations.SerializedName
 
-class CountryModel {
-
+class CountryModel(name: String) {
     @SerializedName("name")
-    val countryName : String = ""
-    @SerializedName("code")
-    val countryCode : String = ""
+    val name : String = ""
 }
