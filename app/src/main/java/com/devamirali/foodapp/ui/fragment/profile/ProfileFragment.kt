@@ -2,6 +2,7 @@ package com.devamirali.foodapp.ui.fragment.profile
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -11,35 +12,42 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.AdapterView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.devamirali.foodapp.R
+import com.devamirali.foodapp.data.adapter.CountryAdapter
 import com.devamirali.foodapp.data.models.CountryModel
 import com.devamirali.foodapp.databinding.FragmentProfileBinding
+import com.devamirali.foodapp.databinding.RowShowDialogCountryBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
-import org.json.JSONArray
-import java.io.IOException
 import java.io.InputStreamReader
-import java.nio.charset.StandardCharsets
 
 
-class ProfileFragment : Fragment(), View.OnClickListener {
+class ProfileFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var bindingCountry : RowShowDialogCountryBinding
     private lateinit var username: String
     private lateinit var from: String
 
+    private lateinit var dialog : AlertDialog
+    private lateinit var inflater : LayoutInflater
+
     private val cameraRequest = 1888
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentProfileBinding.inflate(layoutInflater)
         return binding.root
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -49,56 +57,31 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         binding.cardViewApisListWebsite.setOnClickListener(this)
         binding.cardViewChangePhoto.setOnClickListener(this)
 
-        if (ContextCompat.checkSelfPermission(requireActivity(),
-                Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)
-            ActivityCompat.requestPermissions(requireActivity(),
-                arrayOf(Manifest.permission.CAMERA), cameraRequest)
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_DENIED
+        )
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CAMERA), cameraRequest
+            )
 
 
 ///////////////////////////////////////////////////////////
-        val gson = Gson()
-        val models: List<CountryModel>
-        try {
-            val fileName = "countries.json"
-            @SuppressLint("NewApi", "LocalSuppress")
-            val reader = JsonReader(
-                InputStreamReader(
-                    requireActivity().assets.open(fileName), StandardCharsets.UTF_8
-                )
-            )
 
-            models = gson.fromJson<List<CountryModel>>(
-                reader, object : TypeToken<List<CountryModel?>?>() {}.type
-            )
+//        var list_of_items = arrayOf("Afghanistan", "Åland Islands", "Albania", "Algeria", "American Samoa", "AndorrA","Angola","Anguilla","Antarctica","Antigua and Barbuda")
+//
+//        binding.edtFrom.onItemSelectedListener = this
+//        val aa =
+//            ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, list_of_items)
+//        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//        binding.edtFrom.adapter = aa
+        showDialogCountry()
 
-            // Parse JSON data
-            val itemList = parseJsonToList(models.toString())
-
-            val adapter = ArrayAdapter(requireActivity(),android.R.layout.simple_spinner_item, itemList)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.edtFrom.adapter = adapter
-
-
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
 
     }
 
-    private fun parseJsonToList(jsonData: String): List<CountryModel> {
-        val itemList = mutableListOf<CountryModel>()
-        try {
-            val jsonArray = JSONArray(jsonData)
-            for (i in 0 until jsonArray.length()) {
-                val jsonObject = jsonArray.getJSONObject(i)
-                val name = jsonObject.getString("name")
-                itemList.add(CountryModel(name))
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return itemList
-    }
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -129,11 +112,36 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                 startActivity(intent)
             }
 
-            R.id.card_view_change_photo ->{
+            R.id.card_view_change_photo -> {
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(cameraIntent, cameraRequest)
             }
         }
+    }
+
+    private fun showDialogCountry(){
+
+        var list_of_items = arrayOf("Afghanistan", "Åland Islands", "Albania", "Algeria", "American Samoa", "AndorrA","Angola","Anguilla","Antarctica","Antigua and Barbuda")
+
+        val gson = Gson()
+        val reader =
+            JsonReader(InputStreamReader(requireActivity().assets.open("countries.json"), "UTF-8"))
+        val country = gson.fromJson<List<CountryModel>>(reader, object : TypeToken<List<CountryModel>>() {}.type)
+
+        dialog = AlertDialog.Builder(requireActivity()).create()
+        var inflater = LayoutInflater.from(requireActivity()).inflate(R.layout.row_show_dialog_country,null)
+//        binding = RowShowDialogCountryBinding.inflate(LayoutInflater.from())
+
+
+        val txt = inflater.findViewById<RecyclerView>(R.id.rec_show_country)
+
+        txt.adapter = CountryAdapter(country)
+        txt.layoutManager = LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false)
+
+        dialog.setView(view)
+        dialog.show()
+
+
     }
 
     private fun showEditProfile() {
@@ -156,6 +164,13 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             val photo: Bitmap = data?.extras?.get("data") as Bitmap
             binding.profileImage.setImageBitmap(photo)
         }
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 
 }

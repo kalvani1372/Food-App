@@ -24,6 +24,6 @@ class CountryAdapter(list : List<CountryModel>) : RecyclerView.Adapter<CountryAd
 
     override fun onBindViewHolder(holder: CountryVH, position: Int) {
         val country = countryList[position]
-//        binding.txt1.text = country.countryName
+        binding.txt1.text = country.name
     }
 }
